@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 from bson import json_util, ObjectId
+from flask_cors import CORS
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
@@ -14,6 +15,8 @@ DB_NAME =  os.environ.get("DB_NAME")
 client = MongoClient(MONGODB_URI)
 db = client[DB_NAME]
 app = Flask(__name__)
+# CORS(app, origins="http://localhost:3000")
+CORS(app)
 
 def parse_json(data):
     data = json.loads(json_util.dumps(data))
@@ -26,9 +29,9 @@ def home():
 
 @app.route('/mars', methods=['POST'])
 def web_mars_post():
-    name_receive = request.form['name_give']
-    address_receive = request.form['address_give']
-    size_receive = request.form['size_give']
+    name_receive = request.json['name']
+    address_receive = request.json['address']
+    size_receive = request.json['size']
     doc={
         'name': name_receive,
         'address': address_receive,
@@ -46,17 +49,17 @@ def web_mars_get():
 
 @app.route('/mars/delete', methods=['POST'])
 def web_mars_del():
-    data_id = request.form['id']
+    data_id = request.json['id']
     db.orders.delete_one({'_id': ObjectId(data_id)})
 
     return jsonify({'msg': 'Deleted successfully!'})
 
 @app.route('/mars/update', methods=['POST'])
 def web_mars_update():
-    data_id = request.form['id']
-    name = request.form['name']
-    address = request.form['address']
-    size = request.form['size']
+    data_id = request.json['id']
+    name = request.json['name']
+    address = request.json['address']
+    size = request.json['size']
 
     db.orders.update_one({'_id': ObjectId(data_id)}, {
         '$set': {
