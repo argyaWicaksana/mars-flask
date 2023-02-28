@@ -54,7 +54,7 @@ function FormModal({ closeModal, data, onUpdate }: { closeModal: () => void, dat
           <input type="text" onChange={(e) => setDataInput({ ...dataInput, address: e.target.value })}
             name="address" placeholder="Address" className="p-2 text-black" value={dataInput.address} required />
           <select name="size" onChange={(e) => setDataInput({ ...dataInput, size: Number(e.target.value) })}
-          className="border p-2 text-slate-700 bg-white" placeholder="Select acreage" value={dataInput.size}>
+            className="border p-2 text-slate-700 bg-white" placeholder="Select acreage" value={dataInput.size}>
             <option value="10">10 acres</option>
             <option value="20">20 acres</option>
             <option value="30">30 acres</option>
@@ -167,10 +167,16 @@ export default function Home() {
           <p>Did you know you could buy Martian land?<br />
             This chance won't come again!</p>
         </div>
-        <form className="flex flex-col gap-3" onSubmit={posting}>
-          <input type="text" name="name" placeholder="Name" className="p-2 text-black" required />
-          <input type="text" name="address" placeholder="Address" className="p-2 text-black" required />
-          <select name="size" className="border p-2 text-slate-700 bg-white" placeholder="Select acreage">
+        <form className="flex flex-col gap-4" onSubmit={posting}>
+          <div className="relative pt-4">
+            <input type="text" id="name" name="name" className="peer input w-full text-sm" placeholder=" " required />
+            <label htmlFor="name" className="floating-label">Name</label>
+          </div>
+          <div className="relative pt-4">
+            <input type="text" id="address" name="address" placeholder=" " className="peer input w-full text-sm" required />
+            <label htmlFor="address" className="floating-label">Address</label>
+          </div>
+          <select name="size" className="input text-slate-400 focus:text-white" placeholder="Select acreage">
             <option value="10">10 acres</option>
             <option value="20">20 acres</option>
             <option value="30">30 acres</option>

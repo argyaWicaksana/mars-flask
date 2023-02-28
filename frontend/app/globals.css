@@ -10,6 +10,13 @@
     .btn {
         @apply p-2 bg-yellow-400 text-black;
     }
+    .input {
+        @apply py-2 text-white border-b border-slate-400 focus:border-white bg-transparent outline-none;
+    }
+    .floating-label {
+        @apply absolute left-0 top-1 peer-placeholder-shown:text-slate-400 text-sm peer-placeholder-shown:text-base 
+        peer-placeholder-shown:top-6 peer-focus:text-sm peer-focus:top-1 peer-focus:text-white transition-all;
+    }
 }
 
 @layer base {
