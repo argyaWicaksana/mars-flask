@@ -25,8 +25,8 @@ function FormModal({ closeModal, data, onUpdate }: { closeModal: () => void, dat
     const address = (e.currentTarget.elements.namedItem('address') as HTMLInputElement).value
     const size = (e.currentTarget.elements.namedItem('size') as HTMLInputElement).value
 
-    const response = await fetch('http://localhost:5000/mars/update', {
-      method: 'POST',
+    const response = await fetch('http://localhost:5000', {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: data._id.$oid,
@@ -72,8 +72,8 @@ function RowData({ d, onUpdate }: { d: Order, onUpdate: () => void }) {
   const [showModal, setShowModal] = useState<boolean>(false)
 
   const deleteOrder = async () => {
-    const response = await fetch('http://localhost:5000/mars/delete', {
-      method: 'POST',
+    const response = await fetch('http://localhost:5000', {
+      method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: d._id.$oid
@@ -133,7 +133,7 @@ export default function Home() {
   const [data, setData] = useState<Order[]>()
 
   const getData = () => {
-    fetch('http://localhost:5000/mars')
+    fetch('http://localhost:5000')
       .then(res => res.json())
       .then(
         (res) => setData(res),
@@ -144,7 +144,7 @@ export default function Home() {
   const posting = (e: any) => {
     e.preventDefault()
 
-    fetch('http://localhost:5000/mars', {
+    fetch('http://localhost:5000', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

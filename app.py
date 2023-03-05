@@ -15,19 +15,13 @@ DB_NAME =  os.environ.get("DB_NAME")
 client = MongoClient(MONGODB_URI)
 db = client[DB_NAME]
 app = Flask(__name__)
-# CORS(app, origins="http://localhost:3000")
-CORS(app)
+CORS(app, origins="http://localhost:3000")
 
 def parse_json(data):
     data = json.loads(json_util.dumps(data))
     return data
 
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-
-@app.route('/mars', methods=['POST'])
+@app.route('/', methods=['POST'])
 def web_mars_post():
     name_receive = request.json['name']
     address_receive = request.json['address']
@@ -42,19 +36,19 @@ def web_mars_post():
     return jsonify({'msg': 'Complete!'})
 
 
-@app.route('/mars', methods=['GET'])
+@app.route('/', methods=['GET'])
 def web_mars_get():
     orders_list = list(db.orders.find())
     return parse_json(orders_list)
 
-@app.route('/mars/delete', methods=['POST'])
+@app.route('/', methods=['DELETE'])
 def web_mars_del():
     data_id = request.json['id']
     db.orders.delete_one({'_id': ObjectId(data_id)})
 
     return jsonify({'msg': 'Deleted successfully!'})
 
-@app.route('/mars/update', methods=['POST'])
+@app.route('/', methods=['PUT'])
 def web_mars_update():
     data_id = request.json['id']
     name = request.json['name']
