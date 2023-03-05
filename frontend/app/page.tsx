@@ -159,7 +159,7 @@ export default function Home() {
 
 
   return (
-    <main className="flex items-center py-16 flex-col gap-5 bg-image-body h-screen text-white">
+    <main className="flex items-center py-16 flex-col gap-5 bg-image-body h-screen text-white overflow-auto">
       <div className="space-y-4 sm:w-[500px]">
         <div className="space-y-2">
           <h1 className="text-4xl">Buy Martian land!</h1>
@@ -177,11 +177,11 @@ export default function Home() {
             <label htmlFor="address" className="floating-label">Address</label>
           </div>
           <select name="size" className="input text-slate-400 focus:text-white" placeholder="Select acreage">
-            <option value="10">10 acres</option>
-            <option value="20">20 acres</option>
-            <option value="30">30 acres</option>
-            <option value="40">40 acres</option>
-            <option value="50">50 acres</option>
+            <option value="10" className="text-black">10 acres</option>
+            <option value="20" className="text-black">20 acres</option>
+            <option value="30" className="text-black">30 acres</option>
+            <option value="40" className="text-black">40 acres</option>
+            <option value="50" className="text-black">50 acres</option>
           </select>
           <button type="submit" className="btn">Create order</button>
         </form>
